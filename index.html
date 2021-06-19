@@ -8,7 +8,35 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    
+
+    <div class="container">
+        <div class="title">ToDo List</div>
+
+        <form id="form">
+            <input type="text" class="input" placeholder="Ingrese la tarea">
+            <input type="submit" class="send" value="Agregar">
+        </form>
+
+        <div class="tasks-list">
+            <p>Sin tareas pendientes</p>
+        </div>
+    </div>
+
+    <template id="template">
+        <div class="task">
+            <p class="task-title"></p>
+
+            <div class="buttons">
+                <span id="done-btn" class="material-icons">
+                    done
+                </span>
+                    
+                <span id="delete-btn" class="material-icons">
+                    remove
+                </span>    
+            </div>
+        </div>
+    </template>
 
     <script src="index.js"></script>
 </body>
