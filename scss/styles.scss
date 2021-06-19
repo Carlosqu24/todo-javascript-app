@@ -69,6 +69,36 @@
         width: 40%;
         height: 80%;
 
-        background: rgb(158, 58, 58);
+        background: rgb(255, 255, 255);
+        box-shadow: 18px 18px 30px rgba(32, 32, 32, 0.212),
+                    -18px -18px 30px rgba(238, 238, 238, 0.5);
+        border-radius: 8px;
+
+        display: flex;
+        flex-flow: column wrap;
+        justify-content: center;
+        align-items: center;
+
+        .task {
+            width: 80%;
+            padding: 20px;
+
+            background: $light-blue;
+            border-radius: 8px;
+
+            display: flex;
+            flex-flow: row wrap;
+            justify-content: space-between;
+            align-items: center;
+
+            .buttons {
+                width: 15%;
+
+                display: flex;
+                flex-flow: row wrap;
+                justify-content: space-between;
+                align-items: center;
+            }
+        }
     }
 }
