@@ -5,27 +5,54 @@ const $template = document.querySelector('#template').content;
 const $tasksList = document.querySelector('.tasks-list');
 const $fragment = document.createDocumentFragment();
 
+const clearInput = () => $input.value = "";
 
 const addTask = () => {
-    let taskName = $input.value;
 
-    $template.querySelector('.task-title').textContent = taskName;
+    if ($input.value == "") {
+        alert("NO")
+    } else {
+        $template.querySelector('.task-title').textContent = $input.value;
 
-    let $clone = document.importNode($template, true);
-    $fragment.appendChild($clone);
+        let $clone = document.importNode($template, true);
+        $fragment.appendChild($clone);
 
-    // Saber si contiene algo adentro
-    if ($tasksList.querySelector('.ad')) {
-        $tasksList.innerHTML = "";
-        
+        // Saber si contiene algo adentro
+        if ($tasksList.querySelector('.ad')) $tasksList.innerHTML = "";
+        $tasksList.appendChild($fragment);
+
+        clearInput();
     }
-    $tasksList.appendChild($fragment);
+
+    
+    
 }
 
 const totalTasks = () => {
-    let totalTasks = $tasksList.children.length;
+    let totalTasks = $tasksList.querySelectorAll('.task').length;
 
-    console.log(`Total de tareas: ${totalTasks}`)
+    // console.log(`Total de tareas: ${totalTasks}`);
+};
+
+function verifyInfoAd() {
+    if (!($tasksList.querySelector('.ad')) && !($tasksList.querySelector('.task'))) {
+        let $ad = document.createElement('p');
+        $ad.classList.add('ad');
+        $ad.textContent = "Sin tareas pendientes";
+
+        $tasksList.appendChild($ad)
+    }
+}
+
+function doneTask(e) {
+    e.target.parentElement.parentElement.classList.toggle('done');
+}
+
+function deleteTask(e) {
+    e.target.parentElement.parentElement.remove();
+
+    verifyInfoAd();
+    totalTasks();   
 }
 
 
@@ -40,18 +67,9 @@ document.addEventListener('click', e => {
         totalTasks();
     }
 
-    if (e.target.matches('#done-btn')) {
-        console.log(e.target.parentElement.parentElement.classList)
+    if (e.target.matches('#done-btn')) doneTask(e);
 
-        e.target.parentElement.parentElement.classList.add('done');
-    }
-
-    if (e.target.matches('#delete-btn')) {
-        e.target.parentElement.parentElement.remove();
-
-        totalTasks();   
-    }
-
+    if (e.target.matches('#delete-btn')) deleteTask(e);
 });
 
 
