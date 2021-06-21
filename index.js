@@ -7,10 +7,11 @@ const $fragment = document.createDocumentFragment();
 
 const clearInput = () => $input.value = "";
 
-const addTask = () => {
+function addTask() {
 
     if ($input.value == "") {
-        alert("NO")
+        alert("You have to type something!")
+
     } else {
         $template.querySelector('.task-title').textContent = $input.value;
 
@@ -28,17 +29,11 @@ const addTask = () => {
     
 }
 
-const totalTasks = () => {
-    let totalTasks = $tasksList.querySelectorAll('.task').length;
-
-    // console.log(`Total de tareas: ${totalTasks}`);
-};
-
 function verifyInfoAd() {
     if (!($tasksList.querySelector('.ad')) && !($tasksList.querySelector('.task'))) {
         let $ad = document.createElement('p');
         $ad.classList.add('ad');
-        $ad.textContent = "Sin tareas pendientes";
+        $ad.textContent = "No tasks";
 
         $tasksList.appendChild($ad)
     }
@@ -52,7 +47,6 @@ function deleteTask(e) {
     e.target.parentElement.parentElement.remove();
 
     verifyInfoAd();
-    totalTasks();   
 }
 
 
@@ -64,7 +58,6 @@ document.addEventListener('click', e => {
         e.preventDefault();
 
         addTask();
-        totalTasks();
     }
 
     if (e.target.matches('#done-btn')) doneTask(e);
